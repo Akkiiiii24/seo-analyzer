@@ -1,0 +1,127 @@
+.wrapper {
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.inputGroup {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: var(--bg-glass-strong);
+  border: 1.5px solid var(--border-default);
+  border-radius: var(--radius-xl);
+  padding: var(--space-2);
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-md);
+}
+
+.inputGroup:focus-within {
+  border-color: var(--purple);
+  box-shadow: var(--shadow-glow-purple);
+}
+
+.inputIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--space-2) 0 var(--space-4);
+  font-size: var(--text-lg);
+  color: var(--text-tertiary);
+  flex-shrink: 0;
+}
+
+.input {
+  flex: 1;
+  padding: var(--space-3) var(--space-2);
+  font-size: var(--text-base);
+  color: var(--text-primary);
+  background: transparent;
+  border: none;
+  outline: none;
+  min-width: 0;
+}
+
+.input::placeholder {
+  color: var(--text-tertiary);
+}
+
+.submitBtn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-6);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: white;
+  background: var(--gradient-accent);
+  border: none;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  white-space: nowrap;
+}
+
+.submitBtn:hover:not(:disabled) {
+  background: var(--gradient-accent-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 0 30px rgba(139, 92, 246, 0.3);
+}
+
+.submitBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+.errorMsg {
+  margin-top: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--text-sm);
+  color: var(--red);
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: var(--radius-md);
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .inputGroup {
+    flex-direction: column;
+    border-radius: var(--radius-lg);
+    padding: var(--space-3);
+    gap: var(--space-2);
+  }
+
+  .inputIcon {
+    display: none;
+  }
+
+  .input {
+    width: 100%;
+    text-align: center;
+  }
+
+  .submitBtn {
+    width: 100%;
+    padding: var(--space-4);
+    border-radius: var(--radius-md);
+  }
+}

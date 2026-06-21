@@ -1,0 +1,63 @@
+// Prisma schema for SEO Analyzer SaaS
+// Using SQLite for local development (easy to swap to PostgreSQL later)
+
+generator client {
+  provider = "prisma-client"
+  output   = "../app/lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// User accounts
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  password  String   // Bcrypt hashed password
+  plan      String   @default("free") // "free" or "pro"
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // A user can have many saved reports
+  reports  Report[]
+  sessions Session[]
+}
+
+// Saved SEO analysis reports
+model Report {
+  id        String   @id @default(cuid())
+  url       String   // The analyzed URL
+  score     Int      // Overall SEO score (0-100)
+  data      String   // Full analysis JSON (stored as string in SQLite)
+  createdAt DateTime @default(now())
+
+  // Each report belongs to one user
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId]) // Makes querying reports by user fast
+}
+
+// Track IP-based requests for centralized, serverless-compatible rate-limiting
+model RateLimit {
+  id        String   @id @default(cuid())
+  ip        String   @unique
+  count     Int      @default(1)
+  date      String   // Stored as YYYY-MM-DD
+  updatedAt DateTime @updatedAt
+}
+
+model Session {
+  id        String    @id @default(cuid())
+  userId    String
+  tokenHash String    @unique
+  expiresAt DateTime
+  revokedAt DateTime?
+  createdAt DateTime  @default(now())
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([tokenHash])
+}
