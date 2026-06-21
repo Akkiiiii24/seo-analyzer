@@ -69,6 +69,23 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
       <head>
+        {/* Google tag (gtag.js) */}
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-XDJLJ38QNE"
+          nonce={nonce}
+        />
+        <script
+          nonce={nonce}
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-XDJLJ38QNE');
+            `,
+          }}
+        />
         <script
           nonce={nonce}
           type="application/ld+json"
