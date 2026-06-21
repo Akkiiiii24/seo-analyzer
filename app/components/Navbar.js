@@ -55,6 +55,18 @@ export default function Navbar() {
           >
             Pricing
           </Link>
+          <Link
+            href="/about"
+            className={`${styles.navLink} ${pathname === "/about" ? styles.navLinkActive : ""}`}
+          >
+            About
+          </Link>
+          <Link
+            href="/contact"
+            className={`${styles.navLink} ${pathname === "/contact" ? styles.navLinkActive : ""}`}
+          >
+            Contact
+          </Link>
         </div>
 
         <div className={styles.navCta}>
