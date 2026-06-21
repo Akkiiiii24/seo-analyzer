@@ -6,11 +6,13 @@ export function proxy(request) {
 
   const cspHeader = [
     "default-src 'self'",
-    `script-src 'self' 'nonce-${nonce}' 'strict-dynamic' https://www.googletagmanager.com`,
+    `script-src 'self' 'nonce-${nonce}' 'strict-dynamic' 'unsafe-eval' https: http:`,
     `style-src 'self' 'nonce-${nonce}' 'unsafe-inline' https://fonts.googleapis.com`,  // unsafe-inline needed for some CSS-in-JS + Google Fonts
     "img-src 'self' blob: data: https: https://www.googletagmanager.com",
     "font-src 'self' https://fonts.gstatic.com data:",
     "connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com https://*.googletagmanager.com",
+    "frame-src 'self' https: data:",
+    "child-src 'self' https: blob:",
     "frame-ancestors 'none'",
     "base-uri 'self'",
     "form-action 'self'",

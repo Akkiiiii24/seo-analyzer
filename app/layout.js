@@ -69,6 +69,13 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
       <head>
+        {/* Google AdSense */}
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9329151470909777"
+          crossOrigin="anonymous"
+          nonce={nonce}
+        />
         {/* Google tag (gtag.js) */}
         <script
           async
