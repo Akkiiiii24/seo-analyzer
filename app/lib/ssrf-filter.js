@@ -18,7 +18,7 @@ export async function isSafeUrl(urlString) {
     }
 
     // 2. Resolve the hostname to an IP address
-    const { address } = await lookupPromise(url.hostname);
+    const { address } = await lookupPromise(url.hostname, { family: 4 });
 
     // 3. Simple IPv4 range checks
     const parts = address.split(".").map(Number);

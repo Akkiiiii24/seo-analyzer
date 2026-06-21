@@ -14,8 +14,10 @@ import prisma from "@/app/lib/prisma";
 import { logger } from "@/app/lib/logger";
 
 export async function POST(request) {
+  let session = null;
+  let url = "unknown";
   try {
-    const session = await getSession();
+    session = await getSession();
 
     // Limit checks for guest (unauthenticated) users (Centralized DB-backed)
     if (!session) {
@@ -100,7 +102,7 @@ export async function POST(request) {
     }
 
     const body = await request.json();
-    const { url } = body;
+    url = body?.url;
 
     // Validate URL
     if (!url || typeof url !== "string") {
